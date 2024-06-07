@@ -81,10 +81,28 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [Ubuntu]
+        os: ["Ubuntu amd64"]
         mode: ["Strict"]
+        tag: ["linux-amd64"]
         machine:
           - ${{ inputs.runner }}
+        include:
+          - os: "Ubuntu arm64"
+            mode: "Strict"
+            machine: "ubuntu-latest-2-cores-arm64"
+            tag: "linux-arm64"
+          - os: "macOS amd64"
+            mode: "Strict"
+            machine: "macos-12"
+            tag: "macos-amd64"
+          - os: "macOS arm64"
+            mode: "Strict"
+            machine: "macos-14"
+            tag: "macos-arm64"
+          - os: "Windows amd64"
+            mode: "Strict"
+            machine: "windows-latest-8-cores"
+            tag: "windows-amd64"
 
     name: "Build (${{ matrix.os }})"
     runs-on: ${{ matrix.machine }}
@@ -139,7 +157,7 @@ jobs:
       - name: "Artifact: Build Outputs"
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
-          name: hakuna-lib
+          name: hakuna-lib-${{ matrix.tag }}
           path: |
             hakuna.tgz
             bin/hakuna
@@ -158,7 +176,7 @@ jobs:
   provenance:
     name: Provenance
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.0.0
-    if: inputs.provenance
+    if: false
     needs: [build]
     permissions:
       actions: "read"
