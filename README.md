@@ -6,17 +6,11 @@
 
 Small utility for running [`mitata`](https://github.com/evanwashere/mitata) across several runtimes and preparing reports from the results.
 
+Hakuna ships as both a TypeScript library and a [Bun standalone executable](https://bun.sh/docs/bundler/executables).
+
 ## Usage
 
-**First, you:**
-```
-npm i --save-dev hakuna
-yarn add --dev hakuna
-pnpm i --save-dev hakuna
-bun add --dev hakuna
-```
-
-**Then, you make a benchmark spec file:**
+**First, write a benchmark and config file:**
 
 ```
 vim ./bench-spec.json
@@ -25,19 +19,51 @@ vim ./bench-spec.json
 {
   "runtimes": ["node", "deno", "bun", "elide"],
   "suites": [
-    ["./tests/smoke/example.mjs", {"runtimes": ["node", "bun"]}],
-    ["./tests/smoke/json.mjs"],
-    ["./tests/smoke/fs.mjs"]
+    ["./example.mjs", {"runtimes": ["node", "bun"]}],
+    ["./another-case.mjs"]
   ]
 }
 ```
 
 > This is just an example; obviously, you should set your own test file path.
 
-**Finally, you:**
+```
+vim ./example.mjs
+```
+```javascript
+bench('noop', () => {});
+bench('noop2', () => {});
+
+group('group', () => {
+  baseline('baseline', () => {});
+  bench('Date.now()', () => Date.now());
+  bench('performance.now()', () => performance.now());
+});
+
+group({ name: 'group2', summary: false }, () => {
+  bench('new Array(0)', () => new Array(0));
+  bench('new Array(1024)', () => new Array(1024));
+});
+```
+
+> The symbols from [Mitata](https://github.com/evanwashere/mitata) are automatically available for your script.
+
+**Then, run:**
 
 ```
 npx hakuna ./bench-spec.json
+yarn exec hakuna ./bench-spec.json
+pnpx hakuna ./bench-spec.json
+bun x hakuna ./bench-spec.json
+
+# Or:
+npm i -g hakuna
+yarn i -g hakuna
+pnpm i -g hakuna
+bun i -g hakuna
+
+# And:
+hakuna ./bench-spec.json
 ```
 
 **And you get:**
