@@ -2,3 +2,4 @@ node_modules/
 dist/
 bench-results.json
 .DS_Store
+/bin

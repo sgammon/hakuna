@@ -28,8 +28,13 @@
       "elide": "./dist/cli.js"
     }
   },
+  "bin": {
+    "hakuna": "./bin/hakuna"
+  },
   "scripts": {
+    "hakuna": "./bin/hakuna",
     "build": "tsc -p .",
+    "build:bin": "bun build ./src/main.ts --compile --outfile ./bin/hakuna",
     "run:bun": "bun run ./src/main.ts",
     "run:node": "bun run build && node ./dist/main.js",
     "run:deno": "deno run ./src/main-deno.ts",
