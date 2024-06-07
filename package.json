@@ -7,8 +7,13 @@
   "types": "src/cli.d.ts",
   "description": "benchmark across runtimes with mitata",
   "homepage": "https://github.com/sgammon/hakuna#readme",
-  "bugs": { "url": "https://github.com/sgammon/hakuna/issues" },
-  "repository": { "type": "git", "url": "git+https://github.com/sgammon/hakuna.git" },
+  "bugs": {
+    "url": "https://github.com/sgammon/hakuna/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgammon/hakuna.git"
+  },
   "imports": {
     "#entry": {
       "bun": "./src/entry/bun.ts",
@@ -34,11 +39,11 @@
     "mitata": "git+https://github.com/elide-dev/mitata.git#cbea7911fb517962667d7aa71f934d885620d68b"
   },
   "devDependencies": {
-    "@types/node": "20.12.11",
-    "@types/which": "3.0.3",
-    "esbuild": "0.21.1",
-    "prettier": "3.2.5",
-    "publint": "0.2.7",
+    "@types/node": "20.14.2",
+    "@types/which": "3.0.4",
+    "esbuild": "0.21.4",
+    "prettier": "3.3.1",
+    "publint": "0.2.8",
     "typescript": "5.4.5"
   },
   "dependencies": {
