@@ -125,7 +125,7 @@ jobs:
       - name: "Setup: Install Dependencies"
         run: bun install --frozen
       - name: "Build: Library"
-        run: bun run build && cd dist && tar -czvf ../hakuna.tgz ./*
+        run: bun run build && pushd dist && tar -czvf ../hakuna.tgz ./* && popd
       - name: "Artifact: Build Outputs"
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
@@ -137,7 +137,11 @@ jobs:
         id: hash
         if: ${{ matrix.os == 'ubuntu' && inputs.provenance }}
         run: |
-          echo "hashes=$(sha256sum ./hakuna.tgz | base64 -w0)" >> "$GITHUB_OUTPUT"
+          file ./hakuna.tgz
+          du -h ./hakuna.tgz
+          HASHES=$(sha256sum ./hakuna.tgz | base64 -w0)
+          echo "hashes = $HASHES"
+          echo "hashes=$HASHES" >> "$GITHUB_OUTPUT"
 
   ## Report: Provenance
   provenance:
