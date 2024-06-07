@@ -178,7 +178,7 @@ export async function resolveRuntimeInfo(runtime: RuntimeConfig | string): Promi
     return cached;
   }
   const bin = runtimeConfig.bin || runtimeName;
-  let resolvedPath: string | undefined = undefined;
+  let resolvedPath: string | undefined | null = undefined;
   if (!isAbsolute(bin)) {
     resolvedPath = await which(bin, {nothrow: true});
   } else {
