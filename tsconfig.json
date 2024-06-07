@@ -1,0 +1,26 @@
+{
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.mjs", "src/**/*.mts"],
+  "exclude": ["node_modules", "src/main-deno.ts", "src/entry/deno.ts"],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "dist",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "checkJs": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "declarationMap": true,
+    "baseUrl": ".",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "paths": {
+      "#cli": ["./src/cli.js"],
+    }
+  }
+}

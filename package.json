@@ -1,0 +1,47 @@
+{
+  "name": "hikuna",
+  "type": "module",
+  "license": "MIT",
+  "version": "0.0.1",
+  "main": "src/cli.mjs",
+  "types": "src/cli.d.ts",
+  "description": "benchmark across runtimes with mitata",
+  "homepage": "https://github.com/sgammon/hakuna#readme",
+  "bugs": { "url": "https://github.com/sgammon/hakuna/issues" },
+  "repository": { "type": "git", "url": "git+https://github.com/sgammon/hakuna.git" },
+  "imports": {
+    "#entry": {
+      "bun": "./src/entry/bun.ts",
+      "deno": "./src/entry/deno.ts",
+      "node": "./dist/entry/node.js",
+      "elide": "./dist/entry/elide.js"
+    },
+    "#cli": {
+      "bun": "./src/cli.ts",
+      "deno": "./src/cli.ts",
+      "node": "./dist/cli.js",
+      "elide": "./dist/cli.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "run:bun": "bun run ./src/main.ts",
+    "run:node": "bun run build && node ./dist/main.js",
+    "run:deno": "deno run ./src/main-deno.ts",
+    "run:elide": "bun run build && elide ./dist/main-elide.mjs"
+  },
+  "peerDependencies": {
+    "mitata": "git+https://github.com/elide-dev/mitata.git#cbea7911fb517962667d7aa71f934d885620d68b"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.11",
+    "@types/which": "3.0.3",
+    "esbuild": "0.21.1",
+    "prettier": "3.2.5",
+    "publint": "0.2.7",
+    "typescript": "5.4.5"
+  },
+  "dependencies": {
+    "which": "4.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "runtimes": ["node", "deno", "bun", "elide"],
+  "suites": [
+    ["./tests/smoke/example.mjs", {"runtimes": ["node", "bun", "elide"]}],
+    ["./tests/smoke/json.mjs", {"runtimes": ["node", "bun", "elide"]}],
+    ["./tests/smoke/fs.mjs", {"runtimes": ["node", "bun", "elide"]}]
+  ]
+}
